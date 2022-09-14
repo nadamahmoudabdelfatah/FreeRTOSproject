@@ -644,9 +644,9 @@ ze + USR_Stack_Size)
               00000308 
               00000000 
 Command Line: --debug --xref --apcs=interwork --depend=.\bin\startup.d -o.\bin\
-startup.o -I..\..\Source\portable\RVDS\ARM7_LPC21xx -ID:\ARM\RV31\INC -ID:\ARM\
-CMSIS\Include -ID:\ARM\Inc\Philips --predefine="__EVAL SETA 1" --list=.\startup
-.lst Startup.s
+startup.o -I.\Source\portable\RVDS\ARM7_LPC21xx -ID:\ARM\RV31\INC -ID:\ARM\CMSI
+S\Include -ID:\ARM\Inc\Philips --predefine="__EVAL SETA 1" --list=.\startup.lst
+ Startup.s
 
 
 

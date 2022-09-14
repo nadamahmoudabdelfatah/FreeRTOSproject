@@ -564,9 +564,9 @@ ARM Macro Assembler    Page 9
               E0004000 
               FFFFF030 
 Command Line: --debug --xref --apcs=interwork --depend=.\bin\portasm.d -o.\bin\
-portasm.o -I..\..\Source\portable\RVDS\ARM7_LPC21xx -ID:\ARM\RV31\INC -ID:\ARM\
-CMSIS\Include -ID:\ARM\Inc\Philips --predefine="__EVAL SETA 1" --list=.\portasm
-.lst ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+portasm.o -I.\Source\portable\RVDS\ARM7_LPC21xx -ID:\ARM\RV31\INC -ID:\ARM\CMSI
+S\Include -ID:\ARM\Inc\Philips --predefine="__EVAL SETA 1" --list=.\portasm.lst
+ Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 
 
 
@@ -577,7 +577,7 @@ PORT_ASM 00000000
 
 Symbol: PORT_ASM
    Definitions
-      At line 44 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 44 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
       None
 Comment: PORT_ASM unused
@@ -585,41 +585,41 @@ SkipContextSwitch 00000130
 
 Symbol: SkipContextSwitch
    Definitions
-      At line 113 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 113 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 109 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 109 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: SkipContextSwitch used once
 vPortStartFirstTask 00000000
 
 Symbol: vPortStartFirstTask
    Definitions
-      At line 52 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 52 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 34 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 34 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: vPortStartFirstTask used once
 vPortYield 00000030
 
 Symbol: vPortYield
    Definitions
-      At line 58 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 58 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 36 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 36 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: vPortYield used once
 vPortYieldProcessor 00000038
 
 Symbol: vPortYieldProcessor
    Definitions
-      At line 73 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 73 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 33 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 33 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: vPortYieldProcessor used once
 vPreemptiveTick 000000C4
 
 Symbol: vPreemptiveTick
    Definitions
-      At line 98 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 98 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 35 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 35 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: vPreemptiveTick used once
 6 symbols
 
@@ -632,25 +632,25 @@ T0IR E0004000
 
 Symbol: T0IR
    Definitions
-      At line 40 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 40 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 115 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 115 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: T0IR used once
 T0MATCHBIT 00000001
 
 Symbol: T0MATCHBIT
    Definitions
-      At line 41 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 41 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 114 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 114 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: T0MATCHBIT used once
 VICVECTADDR FFFFF030
 
 Symbol: VICVECTADDR
    Definitions
-      At line 39 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 39 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 118 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 118 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: VICVECTADDR used once
 3 symbols
 
@@ -663,40 +663,40 @@ pxCurrentTCB 00000000
 
 Symbol: pxCurrentTCB
    Definitions
-      At line 29 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
+      At line 29 in file Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
    Uses
       At line 36 in macro portRESTORE_CONTEXT
-      at line 56 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      at line 56 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
       At line 85 in macro portSAVE_CONTEXT
-      at line 83 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      at line 83 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 
 ulCriticalNesting 00000000
 
 Symbol: ulCriticalNesting
    Definitions
-      At line 28 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
+      At line 28 in file Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
    Uses
       At line 40 in macro portRESTORE_CONTEXT
-      at line 56 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      at line 56 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
       At line 81 in macro portSAVE_CONTEXT
-      at line 83 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      at line 83 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 
 vTaskSwitchContext 00000000
 
 Symbol: vTaskSwitchContext
    Definitions
-      At line 30 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 30 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 84 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
-      At line 110 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 84 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 110 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 
 xTaskIncrementTick 00000000
 
 Symbol: xTaskIncrementTick
    Definitions
-      At line 31 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 31 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
    Uses
-      At line 104 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portASM.s
+      At line 104 in file Source\portable\RVDS\ARM7_LPC21xx\portASM.s
 Comment: xTaskIncrementTick used once
 4 symbols
 346 symbols in table

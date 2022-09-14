@@ -340,9 +340,9 @@ ARM Macro Assembler    Page 6
               00000000 
               00000000 
 Command Line: --debug --xref --apcs=interwork --depend=.\bin\serialisr.d -o.\bi
-n\serialisr.o -I..\..\Source\portable\RVDS\ARM7_LPC21xx -ID:\ARM\RV31\INC -ID:\
-ARM\CMSIS\Include -ID:\ARM\Inc\Philips --predefine="__EVAL SETA 1" --list=.\ser
-ialisr.lst serial\serialISR.s
+n\serialisr.o -I.\Source\portable\RVDS\ARM7_LPC21xx -ID:\ARM\RV31\INC -ID:\ARM\
+CMSIS\Include -ID:\ARM\Inc\Philips --predefine="__EVAL SETA 1" --list=.\seriali
+sr.lst serial\serialISR.s
 
 
 
@@ -376,7 +376,7 @@ pxCurrentTCB 00000000
 
 Symbol: pxCurrentTCB
    Definitions
-      At line 29 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
+      At line 29 in file .\Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
    Uses
       At line 85 in macro portSAVE_CONTEXT
       at line 51 in file serial\serialISR.s
@@ -387,7 +387,7 @@ ulCriticalNesting 00000000
 
 Symbol: ulCriticalNesting
    Definitions
-      At line 28 in file ..\..\Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
+      At line 28 in file .\Source\portable\RVDS\ARM7_LPC21xx\portmacro.inc
    Uses
       At line 81 in macro portSAVE_CONTEXT
       at line 51 in file serial\serialISR.s
