@@ -1,0 +1,54 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Nada\Nada\Embedded\FreeRTOSv202012.00\FreeRTOS\Demo\ARM7_LPC2129_Keil_RVDS\RTOSDemo.uvproj
+Project File Date:  12/15/2020
+
+<h2>Output:</h2>
+Build target 'RTOSDemo_THUMB'
+compiling ParTest.c...
+compiling main.c...
+compiling serial.c...
+Starter_Files_V1\source\serial.c(185): warning:  #550-D: variable "cChar" was set but never used
+  signed char cChar;
+Starter_Files_V1\source\serial.c: 1 warning, 0 errors
+compiling tasks.c...
+compiling list.c...
+compiling queue.c...
+compiling port.c...
+compiling heap_2.c...
+linking...
+Program Size: Code=7660 RO-data=32 RW-data=200 ZI-data=15376  
+FromELF: creating hex file...
+".\bin\RTOSDemo.axf" - 0 Error(s), 1 Warning(s).
+n.c(116): error:  #20: identifier "Toggle_Task" is undefined
+                      Toggle_Task,       /* Function that implements the task. */
+Starter_Files_V1\source\main.c(121): error:  #20: identifier "ToggleTaskHandler" is undefined
+                      &ToggleTaskHandler );      /* Used to pass out the created task's handle. */
+Starter_Files_V1\source\main.c: 1 warning, 4 errors
+compiling serial.c...
+Starter_Files_V1\source\serial.c(185): warning:  #550-D: variable "cChar" was set but never used
+  signed char cChar;
+Starter_Files_V1\source\serial.c: 1 warning, 0 errors
+compiling tasks.c...
+compiling list.c...
+compiling queue.c...
+compiling port.c...
+compiling heap_2.c...
+".\bin\RTOSDemo.axf" - 4 Error(s), 2 Warning(s).
+Target not created
+ation is incompatible with "void vSerialPutString(xComPortHandle, const signed char *const, unsigned short)" (declared at line 91 of "..\Common\include\serial.h")
+  signed portBASE_TYPE vSerialPutString(const signed char * const pcString, unsigned short usStringLength )
+Starter_Files_V1\source\serial.c(166): error:  #167: argument of type "unsigned char" is incompatible with parameter of type "xComPortHandle"
+          xSerialPutChar(txBuffer[txDataSizeToSend - txDataSizeLeftToSend--]);
+Starter_Files_V1\source\serial.c(166): error:  #165: too few arguments in function call
+          xSerialPutChar(txBuffer[txDataSizeToSend - txDataSizeLeftToSend--]);
+Starter_Files_V1\source\serial.c(177): error:  #147: declaration is incompatible with "signed long xSerialPutChar(xComPortHandle, signed char, TickType_t)" (declared at line 93 of "..\Common\include\serial.h")
+  void xSerialPutChar(signed char cOutChar)
+Starter_Files_V1\source\serial.c(185): warning:  #550-D: variable "cChar" was set but never used
+  signed char cChar;
+Starter_Files_V1\source\serial.c: 1 warning, 6 errors
+".\bin\RTOSDemo.axf" - 9 Error(s), 1 Warning(s).
+Target not created
