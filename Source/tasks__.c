@@ -224,20 +224,11 @@ by their deadline. */
  * Place the task represented by pxTCB into the appropriate ready list for
  * the task.  It is inserted at the end of the list.
  */
-#if (configUSE_EDF_SCHEDULER  == 0)
-
 #define prvAddTaskToReadyList( pxTCB )                                                                 \
     traceMOVED_TASK_TO_READY_STATE( pxTCB );                                                           \
     taskRECORD_READY_PRIORITY( ( pxTCB )->uxPriority );                                                \
     vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB )->xStateListItem ) ); \
     tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )
-#else
-#define prvAddTaskToReadyList( pxTCB ) /*xGenericListIteam must contain the                           \
-deadline value */ \
-   vListInsert( &(xReadyTasksListEDF), &( ( pxTCB )->xStateListItem ) )                              \
-   tracePOST_MOVED_TASK_TO_READY_STATE( pxTCB )
-#endif
-
 /*-----------------------------------------------------------*/
 
 /*
@@ -343,10 +334,6 @@ typedef struct tskTaskControlBlock       /* The old naming convention is used to
 
     #if ( configUSE_POSIX_ERRNO == 1 )
         int iTaskErrno;
-    #endif
-    /*EDF implementation*/
-    #if ( configUSE_EDF_SCHEDULER == 1 )
-        TickType_t xTaskPeriod;
     #endif
 } tskTCB;
 
@@ -832,106 +819,6 @@ static void prvAddNewTaskToReadyList( TCB_t * pxNewTCB ) PRIVILEGED_FUNCTION;
         return xReturn;
     }
 
-#endif /* configSUPPORT_DYNAMIC_ALLOCATION */
-/*-----------------------------------------------------------*/
-#if ( configSUPPORT_DYNAMIC_ALLOCATION == 1 )
-#if (configUSE_EDF_SCHEDULER == 1)
-    BaseType_t xTaskPeriodicCreate( TaskFunction_t pxTaskCode,
-                            const char * const pcName, /*lint !e971 Unqualified char types are allowed for strings and single characters only. */
-                            const configSTACK_DEPTH_TYPE usStackDepth,
-                            void * const pvParameters,
-                            UBaseType_t uxPriority,
-                            TaskHandle_t * const pxCreatedTask )
-    {
-        TCB_t * pxNewTCB;
-        BaseType_t xReturn;
-
-        /* If the stack grows down then allocate the stack then the TCB so the stack
-         * does not grow into the TCB.  Likewise if the stack grows up then allocate
-         * the TCB then the stack. */
-        #if ( portSTACK_GROWTH > 0 )
-            {
-                /* Allocate space for the TCB.  Where the memory comes from depends on
-                 * the implementation of the port malloc function and whether or not static
-                 * allocation is being used. */
-                pxNewTCB = ( TCB_t * ) pvPortMalloc( sizeof( TCB_t ) );
-
-                if( pxNewTCB != NULL )
-                {
-                    /* Allocate space for the stack used by the task being created.
-                     * The base of the stack memory stored in the TCB so the task can
-                     * be deleted later if required. */
-                    pxNewTCB->pxStack = ( StackType_t * ) pvPortMalloc( ( ( ( size_t ) usStackDepth ) * sizeof( StackType_t ) ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
-
-                    if( pxNewTCB->pxStack == NULL )
-                    {
-                        /* Could not allocate the stack.  Delete the allocated TCB. */
-                        vPortFree( pxNewTCB );
-                        pxNewTCB = NULL;
-                    }
-                }
-            }
-        #else /* portSTACK_GROWTH */
-            {
-                StackType_t * pxStack;
-
-                /* Allocate space for the stack used by the task being created. */
-                pxStack = pvPortMalloc( ( ( ( size_t ) usStackDepth ) * sizeof( StackType_t ) ) ); /*lint !e9079 All values returned by pvPortMalloc() have at least the alignment required by the MCU's stack and this allocation is the stack. */
-
-                if( pxStack != NULL )
-                {
-                    /* Allocate space for the TCB. */
-                    pxNewTCB = ( TCB_t * ) pvPortMalloc( sizeof( TCB_t ) ); /*lint !e9087 !e9079 All values returned by pvPortMalloc() have at least the alignment required by the MCU's stack, and the first member of TCB_t is always a pointer to the task's stack. */
-
-                    if( pxNewTCB != NULL )
-                    {
-                        /* Store the stack location in the TCB. */
-                        pxNewTCB->pxStack = pxStack;
-                    }
-                    else
-                    {
-                        /* The stack cannot be used as the TCB was not created.  Free
-                         * it again. */
-                        vPortFree( pxStack );
-                    }
-                }
-                else
-                {
-                    pxNewTCB = NULL;
-                }
-            }
-        #endif /* portSTACK_GROWTH */
-
-        if( pxNewTCB != NULL )
-        {
-            #if ( tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE != 0 ) /*lint !e9029 !e731 Macro has been consolidated for readability reasons. */
-                {
-                    /* Tasks can be created statically or dynamically, so note this
-                     * task was created dynamically in case it is later deleted. */
-                    pxNewTCB->ucStaticallyAllocated = tskDYNAMICALLY_ALLOCATED_STACK_AND_TCB;
-                }
-            #endif /* tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE */
-
-            prvInitialiseNewTask( pxTaskCode, pcName, ( uint32_t ) usStackDepth, pvParameters, uxPriority, pxCreatedTask, pxNewTCB, NULL );
-            prvAddNewTaskToReadyList( pxNewTCB );
-            xReturn = pdPASS;
-        }
-        else
-        {
-            xReturn = errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;
-        }
-        /*EDF implementation*/
-        pxNewTCB->xTaskPeriod = period;
-        TickType_t currentTick = xTaskGetTickCount();
-        listSET_LIST_ITEM_VALUE( &( ( pxNewTCB )->xStateListItem ), ( pxNewTCB
-        )->xTaskPeriod + currentTick);
-
-        prvAddTaskToReadyList( pxNewTCB );
-
-
-        return xReturn;
-    }
-#endif
 #endif /* configSUPPORT_DYNAMIC_ALLOCATION */
 /*-----------------------------------------------------------*/
 
@@ -3771,7 +3658,11 @@ static void prvInitialiseTaskLists( void )
 	UBaseType_t uxPriority;
 
 
-
+#if ( configUSE_EDF_SCHEDULER == 1 )
+	{
+		vListInitialise( &xReadyTasksListEDF );
+	}
+#else
 	{
 		for( uxPriority = ( UBaseType_t ) 0U; uxPriority < ( UBaseType_t ) configMAX_PRIORITIES; uxPriority++ )
 		{
@@ -3780,10 +3671,6 @@ static void prvInitialiseTaskLists( void )
 			vListInitialise( &( pxReadyTasksLists[ uxPriority ] ) );
 
 		}
-	}
-#if ( configUSE_EDF_SCHEDULER == 1 )
-	{
-		vListInitialise( &xReadyTasksListEDF );
 	}
 #endif
     vListInitialise( &xDelayedTaskList1 );

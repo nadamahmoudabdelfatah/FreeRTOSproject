@@ -852,7 +852,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Source\portable\RVDS\ARM7_LPC21xx</IncludePath>
+              <IncludePath>.\Source\portable\RVDS\ARM7_LPC21xx</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>

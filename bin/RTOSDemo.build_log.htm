@@ -1,0 +1,24 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+D:\Nada\Nada\Embedded\FreeRTOSproject\RTOSDemo.uvproj
+Project File Date:  09/16/2022
+
+<h2>Output:</h2>
+Build target 'RTOSDemo_THUMB'
+compiling tasks.c...
+linking...
+Program Size: Code=7592 RO-data=32 RW-data=200 ZI-data=15360  
+FromELF: creating hex file...
+".\bin\RTOSDemo.axf" - 0 Error(s), 0 Warning(s).
+       \
+Source\tasks.c(232): error:  #79: expected a type specifier
+      vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB )->xStateListItem  ) ); \
+Source\tasks.c(232): error:  #79: expected a type specifier
+      vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB )->xStateListItem  ) ); \
+Source\tasks.c(232): warning:  #77-D: this declaration has no storage class or type specifier
+      vListInsertEnd( &( pxReadyTasksLists[ ( pxTCB )->uxPriority ] ), &( ( pxTCB )->xStateListItem  ) ); \
+Source\tasks.c(232): error:  #147: declaration is incompatible with "void vListInsertEnd(List_t *const, ListItem_t *const)" (declared at line 393 of ".\Source\include\list.h")
+      vListInsertEnd( &( pxReadyTasks

@@ -42,7 +42,7 @@
  * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/
 
-#define configUSE_PREEMPTION		0
+#define configUSE_PREEMPTION		1
 #define configUSE_IDLE_HOOK			0
 #define configUSE_TICK_HOOK			0
 #define configCPU_CLOCK_HZ			( ( unsigned long ) 60000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. */
@@ -73,7 +73,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelay				1
 
 /***	Added by Nada Mahmoud ***/
-#define configUSE_EDF_SCHEDULER  0U
+#define configUSE_EDF_SCHEDULER  1U
 /******************************/
 
 #endif /* FREERTOS_CONFIG_H */
