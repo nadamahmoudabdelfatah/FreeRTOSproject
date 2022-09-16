@@ -841,10 +841,12 @@ static void prvAddNewTaskToReadyList( TCB_t * pxNewTCB ) PRIVILEGED_FUNCTION;
                             const configSTACK_DEPTH_TYPE usStackDepth,
                             void * const pvParameters,
                             UBaseType_t uxPriority,
-                            TaskHandle_t * const pxCreatedTask )
+                            TaskHandle_t * const pxCreatedTask,
+							              TickType_t period)
     {
         TCB_t * pxNewTCB;
         BaseType_t xReturn;
+        TickType_t currentTick = 0;
 
         /* If the stack grows down then allocate the stack then the TCB so the stack
          * does not grow into the TCB.  Likewise if the stack grows up then allocate
@@ -921,8 +923,9 @@ static void prvAddNewTaskToReadyList( TCB_t * pxNewTCB ) PRIVILEGED_FUNCTION;
             xReturn = errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY;
         }
         /*EDF implementation*/
+        /***Period need to be updated****/
         pxNewTCB->xTaskPeriod = period;
-        TickType_t currentTick = xTaskGetTickCount();
+        currentTick = xTaskGetTickCount();
         listSET_LIST_ITEM_VALUE( &( ( pxNewTCB )->xStateListItem ), ( pxNewTCB
         )->xTaskPeriod + currentTick);
 
@@ -2108,7 +2111,10 @@ static void prvAddNewTaskToReadyList( TCB_t * pxNewTCB )
 void vTaskStartScheduler( void )
 {
     BaseType_t xReturn;
-
+            /***EDF implementation***/
+#if (configUSE_EDF_SCHEDULER == 1)
+            TickType_t initIDLEPeriod = 100;
+#endif
     /* Add the idle task at the lowest priority. */
     #if ( configSUPPORT_STATIC_ALLOCATION == 1 )
         {
@@ -2135,6 +2141,18 @@ void vTaskStartScheduler( void )
             {
                 xReturn = pdFAIL;
             }
+        }
+    /**EDF implementation***/
+    #elif (configUSE_EDF_SCHEDULER == 1)
+        {
+					initIDLEPeriod = 100;
+        	xReturn = xTaskPeriodicCreate( prvIdleTask,
+        			                     "IDLE",
+										 configMINIMAL_STACK_SIZE,
+        			                     (void * ) NULL,
+										 ( tskIDLE_PRIORITY | portPRIVILEGE_BIT ),
+										 NULL,
+        	           initIDLEPeriod );
         }
     #else /* if ( configSUPPORT_STATIC_ALLOCATION == 1 ) */
         {

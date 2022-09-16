@@ -73,7 +73,7 @@ to exclude the API function. */
 #define INCLUDE_vTaskDelay				1
 
 /***	Added by Nada Mahmoud ***/
-#define configUSE_EDF_SCHEDULER  0U
+#define configUSE_EDF_SCHEDULER  1U
 /******************************/
 
 #endif /* FREERTOS_CONFIG_H */
