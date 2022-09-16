@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\bin\RTOSDemo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\bin\RTOSDemo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sat Sep 17 00:10:39 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sat Sep 17 00:17:39 2022
 <BR><P>
 <H3>Maximum Stack Usage =        156 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -419,7 +419,7 @@ Global Symbols
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsert
 </UL>
 
-<P><STRONG><a name="[12]"></a>vTaskSwitchContext</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, tasks.o(.text))
+<P><STRONG><a name="[12]"></a>vTaskSwitchContext</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, tasks.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskSuspend
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> portasm.o(PORT_ASM)
@@ -442,7 +442,7 @@ Global Symbols
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsert
 </UL>
 
-<P><STRONG><a name="[4b]"></a>xTaskResumeFromISR</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, tasks.o(.text), UNUSED)
+<P><STRONG><a name="[4b]"></a>xTaskResumeFromISR</STRONG> (Thumb, 82 bytes, Stack size 24 bytes, tasks.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvTaskIsTaskSuspended
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uxListRemove
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vListInsert
@@ -530,7 +530,7 @@ Global Symbols
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
 </UL>
 
-<P><STRONG><a name="[5b]"></a>xTaskGenericNotify</STRONG> (Thumb, 252 bytes, Stack size 48 bytes, tasks.o(.text), UNUSED)
+<P><STRONG><a name="[5b]"></a>xTaskGenericNotify</STRONG> (Thumb, 246 bytes, Stack size 48 bytes, tasks.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_switch8 (via Veneer)
 <LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortExitCritical
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortEnterCritical
@@ -867,7 +867,7 @@ Local Symbols
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskResume
 </UL>
 
-<P><STRONG><a name="[4c]"></a>prvCheckTasksWaitingTermination</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, tasks.o(.text))
+<P><STRONG><a name="[4c]"></a>prvCheckTasksWaitingTermination</STRONG> (Thumb, 128 bytes, Stack size 8 bytes, tasks.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = prvCheckTasksWaitingTermination &rArr; prvDeleteTCB &rArr; vPortFree &rArr; xTaskResumeAll &rArr; xTaskIncrementTick &rArr; vListInsert
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvDeleteTCB
