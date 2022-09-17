@@ -111,7 +111,7 @@ void vListInsertEnd( List_t * const pxList,
     ( pxList->uxNumberOfItems )++;
 }
 /*-----------------------------------------------------------*/
-
+int flag_debug = 0;
 void vListInsert( List_t * const pxList,
                   ListItem_t * const pxNewListItem )
 {
@@ -162,8 +162,10 @@ void vListInsert( List_t * const pxList,
 
         for( pxIterator = ( ListItem_t * ) &( pxList->xListEnd ); pxIterator->pxNext->xItemValue <= xValueOfInsertion; pxIterator = pxIterator->pxNext ) /*lint !e826 !e740 !e9087 The mini list structure is used as the list end to save RAM.  This is checked and valid. *//*lint !e440 The iterator moves to a different value, not xValueOfInsertion. */
         {
+					flag_debug++;
             /* There is nothing to do here, just iterating to the wanted
              * insertion position. */
+					//crashes here
         }
     }
 
