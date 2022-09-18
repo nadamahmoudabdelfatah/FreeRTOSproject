@@ -2920,6 +2920,10 @@ BaseType_t xTaskIncrementTick( void )
          * has been found whose block time has not expired there is no need to
          * look any further down the list. */
         ////xNextTaskUnblockTime nearest unblocktime
+				/////need to be checked
+        //next task unblocktime contains deadline of the task going to be unblocked
+        xNextTaskUnblockTime = listSET_LIST_ITEM_VALUE( &( ( pxTCB )->xStateListItem ), ( pxTCB
+        )->xTaskPeriod + xConstTickCount);
         if( xConstTickCount >= xNextTaskUnblockTime )
         {
             for( ; ; )
@@ -2942,7 +2946,7 @@ BaseType_t xTaskIncrementTick( void )
                      * be removed from the Blocked state. */
                     pxTCB = listGET_OWNER_OF_HEAD_ENTRY( pxDelayedTaskList ); /*lint !e9079 void * is used as this macro is used with timers and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
                     xItemValue = listGET_LIST_ITEM_VALUE( &( pxTCB->xStateListItem ) );
-                    if((pxTCB->uxPriority) == tskIDLE_PRIORITY | portPRIVILEGE_BIT)
+                    if((pxTCB->uxPriority) == (tskIDLE_PRIORITY | portPRIVILEGE_BIT))
                     {
                         listSET_LIST_ITEM_VALUE( &( ( pxTCB )->xStateListItem ), ( pxTCB
                        )->xTaskPeriod + xConstTickCount+100);

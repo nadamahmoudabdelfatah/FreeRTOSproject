@@ -88,7 +88,7 @@ pinState_t buttonState;
 void Button_Task( void * pvParameters )
 {
 TickType_t xLastWakeTime;
-xLastWakeTime = xTaskGetTickCount();
+xLastWakeTime = 0;
 //configASSERT(((uint32_t ) pvParameters)==1);
  /* Enter an infinite loop to perform the task processing. */
  for( ;; )
@@ -102,7 +102,7 @@ xLastWakeTime = xTaskGetTickCount();
 void Led_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-	xLastWakeTime = xTaskGetTickCount();
+	xLastWakeTime = 0;
 //configASSERT(((uint32_t ) pvParameters)==1);
  /* Enter an infinite loop to perform the task processing. */
  for( ;; )
@@ -155,7 +155,7 @@ int main( void )
                     "Button_Task",          /* Text name for the task. */
                     100,      /* Stack size in words, not bytes. */
                     ( void * ) 0,    /* Parameter passed into the task. */
-                    2,/* Priority at which the task is created.Priority of idle task 0 */
+                    1,/* Priority at which the task is created.Priority of idle task 0 */
                     &ButtonTaskHandler, 
 										20);      /* Used to pass out the created task's handle. */
 	/* Now all the tasks have been started - start the scheduler.
