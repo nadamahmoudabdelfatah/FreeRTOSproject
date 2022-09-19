@@ -87,13 +87,19 @@ static void prvSetupHardware( void );
 pinState_t buttonState;
 void Button_Task( void * pvParameters )
 {
+	int i=0;
 TickType_t xLastWakeTime;
-xLastWakeTime = 0;
+xLastWakeTime = xTaskGetTickCount();
 //configASSERT(((uint32_t ) pvParameters)==1);
  /* Enter an infinite loop to perform the task processing. */
  for( ;; )
  {
- vTaskDelayUntil( &xLastWakeTime, 20 );
+	 	 for(i =0 ; i< 1000000;i++)
+	 {
+	 }
+	 	 	GPIO_write(PORT_0,PIN1,PIN_IS_LOW);
+ vTaskDelayUntil( &xLastWakeTime, 200 );
+	 	 	GPIO_write(PORT_0,PIN1,PIN_IS_HIGH);
 	buttonState = GPIO_read(PORT_0,PIN1);
 
  /* Task code goes here. */
@@ -102,12 +108,20 @@ xLastWakeTime = 0;
 void Led_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-	xLastWakeTime = 0;
+		int i=0;
+	xLastWakeTime = xTaskGetTickCount();
+
 //configASSERT(((uint32_t ) pvParameters)==1);
  /* Enter an infinite loop to perform the task processing. */
  for( ;; )
  {
-	vTaskDelayUntil( &xLastWakeTime, 10 );
+	 for(i =0 ; i< 1000000;i++)
+	 {
+	 }
+
+	GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
+	vTaskDelayUntil( &xLastWakeTime, 200 );
+	 	 	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
  if(buttonState == PIN_IS_HIGH)
  {
 	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
@@ -147,7 +161,7 @@ int main( void )
                     ( void * ) 0,    /* Parameter passed into the task. */
                     1,/* Priority at which the task is created.Priority of idle task 0 */
                     &LedTaskHandler,
-                    10									
+                    200								
 										);      /* Used to pass out the created task's handle. */
 /* Create the task, storing the handle. */
     xTaskPeriodicCreate(
@@ -156,8 +170,9 @@ int main( void )
                     100,      /* Stack size in words, not bytes. */
                     ( void * ) 0,    /* Parameter passed into the task. */
                     1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &ButtonTaskHandler, 
-										20);      /* Used to pass out the created task's handle. */
+                    &ButtonTaskHandler,
+										200
+										);      /* Used to pass out the created task's handle. */
 	/* Now all the tasks have been started - start the scheduler.
 
 	NOTE : Tasks run in system mode and the scheduler runs in Supervisor mode.

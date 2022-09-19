@@ -825,9 +825,9 @@
 #ifndef portDONT_DISCARD
     #define portDONT_DISCARD
 #endif
-
+//edited by nada
 #ifndef configUSE_TIME_SLICING
-    #define configUSE_TIME_SLICING    1
+    #define configUSE_TIME_SLICING    0
 #endif
 
 #ifndef configINCLUDE_APPLICATION_DEFINED_PRIVILEGED_FUNCTIONS
