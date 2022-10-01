@@ -15,3 +15,4 @@
 .\bin\tasks.o: .\Source\include\list.h
 .\bin\tasks.o: .\Source\include\timers.h
 .\bin\tasks.o: .\Source\include\stack_macros.h
+.\bin\tasks.o: D:\ARM\ARMCC\bin\..\include\stdio.h

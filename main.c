@@ -85,12 +85,8 @@ static void prvSetupHardware( void );
 
 
 pinState_t buttonState;
-TickType_t exectime0=0;
-TickType_t exectime1=0;
-TickType_t exectime2=0;
-TickType_t exectime3=0;
-TickType_t exectime4=0;
-TickType_t exectime5=0;
+char dbgdata[200];
+
 void Button_1_Monitor_Task( void * pvParameters )
 {
 	
@@ -106,9 +102,13 @@ TickType_t xLastWakeTime;
 	 }
 	 	 	GPIO_write(PORT_0,PIN1,PIN_IS_LOW);
 	 xLastWakeTime = xTaskGetTickCount();
-	 	 exectime0= xTaskGetTickCount()-exectime0;
+	 //	 exectime0= xTaskGetTickCount()-exectime0;
  vTaskDelayUntil( &xLastWakeTime, 50);
-	 	 exectime0= xTaskGetTickCount();
+	 	 	vTaskGetRunTimeStats(dbgdata);
+	 xSerialPutChar(' ');
+	vSerialPutString(dbgdata,200);
+	xSerialPutChar('\n');
+	// 	 exectime0= xTaskGetTickCount();
 	 	 	GPIO_write(PORT_0,PIN1,PIN_IS_HIGH);
 	buttonState = GPIO_read(PORT_0,PIN1);
 
@@ -131,9 +131,13 @@ void Button_2_Monitor_Task( void * pvParameters )
 
 	GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
 	 xLastWakeTime = xTaskGetTickCount();
-	 exectime1=exectime1- xTaskGetTickCount();
+	// exectime1=exectime1- xTaskGetTickCount();
 	vTaskDelayUntil( &xLastWakeTime, 50 );
-	 exectime1= xTaskGetTickCount();
+	 	 	vTaskGetRunTimeStats(dbgdata);
+	 xSerialPutChar(' ');
+	vSerialPutString(dbgdata,200);
+	xSerialPutChar('\n');
+	// exectime1= xTaskGetTickCount();
 	 	 	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
  if(buttonState == PIN_IS_HIGH)
  {
@@ -147,6 +151,7 @@ void Button_2_Monitor_Task( void * pvParameters )
  /* Task code goes here. */
  }
 } 
+
 void Periodic_Transmitter_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
@@ -163,9 +168,13 @@ void Periodic_Transmitter_Task( void * pvParameters )
 
 	GPIO_write(PORT_0,PIN3,PIN_IS_LOW);
 	 xLastWakeTime = xTaskGetTickCount();
-	 	 exectime2= exectime2-xTaskGetTickCount();
+	 	// exectime2= exectime2-xTaskGetTickCount();
 	vTaskDelayUntil( &xLastWakeTime, 100 );
-	 	 exectime2= xTaskGetTickCount();
+	 	vTaskGetRunTimeStats(dbgdata);
+	 xSerialPutChar(' ');
+	vSerialPutString(dbgdata,200);
+	xSerialPutChar('\n');
+	 //	 exectime2= xTaskGetTickCount();
 	 	 	GPIO_write(PORT_0,PIN3,PIN_IS_HIGH);
  if(buttonState == PIN_IS_HIGH)
  {
@@ -179,6 +188,7 @@ void Periodic_Transmitter_Task( void * pvParameters )
  /* Task code goes here. */
  }
 } 
+
 void Uart_Receiver_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
@@ -195,9 +205,13 @@ void Uart_Receiver_Task( void * pvParameters )
 
 	GPIO_write(PORT_0,PIN4,PIN_IS_LOW);
 	 xLastWakeTime = xTaskGetTickCount();
-	 	 exectime3= xTaskGetTickCount()- exectime3;
+	 	 //exectime3= xTaskGetTickCount()- exectime3;
 	vTaskDelayUntil( &xLastWakeTime, 20 );
-	 exectime3= xTaskGetTickCount();
+	 	vTaskGetRunTimeStats(dbgdata);
+	 xSerialPutChar(' ');
+	vSerialPutString(dbgdata,200);
+	xSerialPutChar('\n');
+	 //exectime3= xTaskGetTickCount();
 	 	 	GPIO_write(PORT_0,PIN4,PIN_IS_HIGH);
  if(buttonState == PIN_IS_HIGH)
  {
@@ -211,6 +225,7 @@ void Uart_Receiver_Task( void * pvParameters )
  /* Task code goes here. */
  }
 } 
+
 void Load_1_Simulation_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
@@ -227,9 +242,13 @@ void Load_1_Simulation_Task( void * pvParameters )
 
 	GPIO_write(PORT_0,PIN5,PIN_IS_LOW);
 	 xLastWakeTime = xTaskGetTickCount();
-	 exectime4= xTaskGetTickCount() - exectime4;
+	// exectime4= xTaskGetTickCount() - exectime4;
 	vTaskDelayUntil( &xLastWakeTime, 10 );
-	 exectime4= xTaskGetTickCount();
+	 	vTaskGetRunTimeStats(dbgdata);
+	 xSerialPutChar(' ');
+	vSerialPutString(dbgdata,200);
+	xSerialPutChar('\n');
+	// exectime4= xTaskGetTickCount();
 	 	 	GPIO_write(PORT_0,PIN5,PIN_IS_HIGH);
  if(buttonState == PIN_IS_HIGH)
  {
@@ -243,6 +262,7 @@ void Load_1_Simulation_Task( void * pvParameters )
  /* Task code goes here. */
  }
 } 
+
 void Load_2_Simulation_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
@@ -252,16 +272,20 @@ void Load_2_Simulation_Task( void * pvParameters )
 //configASSERT(((uint32_t ) pvParameters)==1);
  /* Enter an infinite loop to perform the task processing. */
  for( ;; )
- {
-	 for(i =0 ; i< 1000000;i++)
+ {               
+	 for(i =0 ; i< 10000000;i++)
 	 {
 	 }
 
 	GPIO_write(PORT_0,PIN6,PIN_IS_LOW);
 	 xLastWakeTime = xTaskGetTickCount();
-	 exectime5= xTaskGetTickCount()-exectime5;
+	// exectime5= xTaskGetTickCount()-exectime5;
 	vTaskDelayUntil( &xLastWakeTime, 100 );
-	 exectime5= xTaskGetTickCount();
+	 	vTaskGetRunTimeStats(dbgdata);
+	 xSerialPutChar(' ');
+	vSerialPutString(dbgdata,200);
+	xSerialPutChar('\n');
+	// exectime5= xTaskGetTickCount();
 	 	 	GPIO_write(PORT_0,PIN6,PIN_IS_HIGH);
  if(buttonState == PIN_IS_HIGH)
  {
@@ -281,6 +305,14 @@ void vApplicationIdleHook( void )
 	//GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
 	
 }
+
+void vApplicationTickHook( void )
+{
+
+//	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
+	//GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
+	
+}
 /*
  * Application entry point:
  * Starts all the other tasks, then starts the scheduler. 
@@ -296,7 +328,7 @@ int main( void )
 {
 	/* Setup the hardware for use with the Keil demo board. */
 	prvSetupHardware();
-
+  //xSerialPutChar('a');
 	
     /* Create Tasks here */
 /* Create the task, storing the handle. */

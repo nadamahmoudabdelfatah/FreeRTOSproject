@@ -44,7 +44,7 @@
 
 #define configUSE_PREEMPTION		1
 #define configUSE_IDLE_HOOK			1
-#define configUSE_TICK_HOOK			1
+#define configUSE_TICK_HOOK			0
 #define configCPU_CLOCK_HZ			( ( unsigned long ) 60000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. */
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES		( 4 )
@@ -80,5 +80,8 @@ to exclude the API function. */
 #define configGENERATE_RUN_TIME_STATS 1U
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()
 #define portGET_RUN_TIME_COUNTER_VALUE() (T1TC)
+
+
+
 
 #endif /* FREERTOS_CONFIG_H */

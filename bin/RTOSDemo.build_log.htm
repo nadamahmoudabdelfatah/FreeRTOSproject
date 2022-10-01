@@ -4,29 +4,34 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 D:\Nada\Nada\Embedded\FreeRTOSproject\RTOSDemo.uvproj
-Project File Date:  09/16/2022
+Project File Date:  10/01/2022
 
 <h2>Output:</h2>
 Build target 'RTOSDemo_THUMB'
+compiling main.c...
+main.c(109): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const signed char *const"
+        vSerialPutString(dbgdata,200);
+main.c(138): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const signed char *const"
+        vSerialPutString(dbgdata,200);
+main.c(175): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const signed char *const"
+        vSerialPutString(dbgdata,200);
+main.c(212): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const signed char *const"
+        vSerialPutString(dbgdata,200);
+main.c(249): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const signed char *const"
+        vSerialPutString(dbgdata,200);
+main.c(286): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "const signed char *const"
+        vSerialPutString(dbgdata,200);
+main.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=8388 RO-data=32 RW-data=284 ZI-data=15380  
+Program Size: Code=10612 RO-data=32 RW-data=268 ZI-data=15580  
 FromELF: creating hex file...
-".\bin\RTOSDemo.axf" - 0 Error(s), 0 Warning(s).
-r(s), 0 Warning(s).
-".\bin\RTOSDemo.axf" - 1 Error(s), 0 Warning(s).
-Target not created
- co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
-Source\tasks.c: 1 warning, 0 errors
-linking...
-Program Size: Code=7776 RO-data=32 RW-data=240 ZI-data=15376  
-FromELF: creating hex file...
-".\bin\RTOSDemo.axf" - 0 Error(s), 1 Warning(s).
-r(s), 1 Warning(s).
-. */
-Source\tasks.c: 1 warning, 1 error
-".\bin\RTOSDemo.axf" - 1 Error(s), 1 Warning(s).
-Target not created
-co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
-Source\tasks.c: 2 warnings, 1 error
-".\bin\RTOSDemo.axf" - 1 Error(s), 2 Warning(s).
-Target not created
+".\bin\RTOSDemo.axf" - 0 Error(s), 6 Warning(s).
+d a statement
+                }
+Starter_Files_V1\source\GPIO.c: 1 warning, 0 errors
+compiling GPIO_cfg.c...
+compiling serial.c...
+Starter_Files_V1\source\serial.c(185): warning:  #550-D: variable "cChar" was set but never used
+  signed char cChar;
+Starter_Files_V1\source\serial.c: 1 warning, 0 errors
+compiling list.c..
