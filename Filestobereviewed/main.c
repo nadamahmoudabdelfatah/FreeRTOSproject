@@ -31,7 +31,7 @@
 	called.  The demo applications included in the FreeRTOS.org download switch
 	to supervisor mode prior to main being called.  If you are not using one of
 	these demo application projects then ensure Supervisor mode is used.
-*/
+ */
 
 
 /*
@@ -85,201 +85,233 @@ static void prvSetupHardware( void );
 
 
 pinState_t buttonState;
-TickType_t exectime0=0;
-TickType_t exectime1=0;
-TickType_t exectime2=0;
-TickType_t exectime3=0;
-TickType_t exectime4=0;
-TickType_t exectime5=0;
+char dbgdata[200];
+
 void Button_1_Monitor_Task( void * pvParameters )
 {
-	
-	int i=0;
-TickType_t xLastWakeTime;
-//xLastWakeTime = xTaskGetTickCount();
-//configASSERT(((uint32_t ) pvParameters)==1);
- /* Enter an infinite loop to perform the task processing. */
- for( ;; )
- {
-	 	 for(i =0 ; i< 1000000;i++)
-	 {
-	 }
-	 	 	GPIO_write(PORT_0,PIN1,PIN_IS_LOW);
-	 xLastWakeTime = xTaskGetTickCount();
-	 	 exectime0= xTaskGetTickCount()-exectime0;
- vTaskDelayUntil( &xLastWakeTime, 50);
-	 	 exectime0= xTaskGetTickCount();
-	 	 	GPIO_write(PORT_0,PIN1,PIN_IS_HIGH);
-	buttonState = GPIO_read(PORT_0,PIN1);
 
- /* Task code goes here. */
- }
+	int i=0;
+	TickType_t xLastWakeTime;
+	//xLastWakeTime = xTaskGetTickCount();
+	//configASSERT(((uint32_t ) pvParameters)==1);
+	/* Enter an infinite loop to perform the task processing. */
+	for( ;; )
+	{
+		for(i =0 ; i< 1000000;i++)
+		{
+		}
+		GPIO_write(PORT_0,PIN1,PIN_IS_LOW);
+		xLastWakeTime = xTaskGetTickCount();
+		//	 exectime0= xTaskGetTickCount()-exectime0;
+		vTaskDelayUntil( &xLastWakeTime, 50);
+		vTaskGetRunTimeStats(dbgdata);
+		xSerialPutChar(' ');
+		vSerialPutString(dbgdata,200);
+		xSerialPutChar('\n');
+		// 	 exectime0= xTaskGetTickCount();
+		GPIO_write(PORT_0,PIN1,PIN_IS_HIGH);
+		buttonState = GPIO_read(PORT_0,PIN1);
+
+		/* Task code goes here. */
+	}
 } 
 void Button_2_Monitor_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-		int i=0;
-	
+	int i=0;
 
-//configASSERT(((uint32_t ) pvParameters)==1);
- /* Enter an infinite loop to perform the task processing. */
- for( ;; )
- {
-	 for(i =0 ; i< 500000;i++)
-	 {
-	 }
 
-	GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
-	 xLastWakeTime = xTaskGetTickCount();
-	 exectime1=exectime1- xTaskGetTickCount();
-	vTaskDelayUntil( &xLastWakeTime, 50 );
-	 exectime1= xTaskGetTickCount();
-	 	 	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
- if(buttonState == PIN_IS_HIGH)
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
- }
- else
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
- }
+	//configASSERT(((uint32_t ) pvParameters)==1);
+	/* Enter an infinite loop to perform the task processing. */
+	for( ;; )
+	{
+		for(i =0 ; i< 500000;i++)
+		{
+		}
 
- /* Task code goes here. */
- }
+		GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
+		xLastWakeTime = xTaskGetTickCount();
+		// exectime1=exectime1- xTaskGetTickCount();
+		vTaskDelayUntil( &xLastWakeTime, 50 );
+		vTaskGetRunTimeStats(dbgdata);
+		xSerialPutChar(' ');
+		vSerialPutString(dbgdata,200);
+		xSerialPutChar('\n');
+		// exectime1= xTaskGetTickCount();
+		GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
+		if(buttonState == PIN_IS_HIGH)
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
+		}
+		else
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
+		}
+
+		/* Task code goes here. */
+	}
 } 
+
 void Periodic_Transmitter_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-		int i=0;
-	
+	int i=0;
 
-//configASSERT(((uint32_t ) pvParameters)==1);
- /* Enter an infinite loop to perform the task processing. */
- for( ;; )
- {
-	 for(i =0 ; i< 500000;i++)
-	 {
-	 }
 
-	GPIO_write(PORT_0,PIN3,PIN_IS_LOW);
-	 xLastWakeTime = xTaskGetTickCount();
-	 	 exectime2= exectime2-xTaskGetTickCount();
-	vTaskDelayUntil( &xLastWakeTime, 100 );
-	 	 exectime2= xTaskGetTickCount();
-	 	 	GPIO_write(PORT_0,PIN3,PIN_IS_HIGH);
- if(buttonState == PIN_IS_HIGH)
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
- }
- else
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
- }
+	//configASSERT(((uint32_t ) pvParameters)==1);
+	/* Enter an infinite loop to perform the task processing. */
+	for( ;; )
+	{
+		for(i =0 ; i< 500000;i++)
+		{
+		}
 
- /* Task code goes here. */
- }
+		GPIO_write(PORT_0,PIN3,PIN_IS_LOW);
+		xLastWakeTime = xTaskGetTickCount();
+		// exectime2= exectime2-xTaskGetTickCount();
+		vTaskDelayUntil( &xLastWakeTime, 100 );
+		vTaskGetRunTimeStats(dbgdata);
+		xSerialPutChar(' ');
+		vSerialPutString(dbgdata,200);
+		xSerialPutChar('\n');
+		//	 exectime2= xTaskGetTickCount();
+		GPIO_write(PORT_0,PIN3,PIN_IS_HIGH);
+		if(buttonState == PIN_IS_HIGH)
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
+		}
+		else
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
+		}
+
+		/* Task code goes here. */
+	}
 } 
+
 void Uart_Receiver_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-		int i=0;
-	
+	int i=0;
 
-//configASSERT(((uint32_t ) pvParameters)==1);
- /* Enter an infinite loop to perform the task processing. */
- for( ;; )
- {
-	 for(i =0 ; i< 1000000;i++)
-	 {
-	 }
 
-	GPIO_write(PORT_0,PIN4,PIN_IS_LOW);
-	 xLastWakeTime = xTaskGetTickCount();
-	 	 exectime3= xTaskGetTickCount()- exectime3;
-	vTaskDelayUntil( &xLastWakeTime, 20 );
-	 exectime3= xTaskGetTickCount();
-	 	 	GPIO_write(PORT_0,PIN4,PIN_IS_HIGH);
- if(buttonState == PIN_IS_HIGH)
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
- }
- else
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
- }
+	//configASSERT(((uint32_t ) pvParameters)==1);
+	/* Enter an infinite loop to perform the task processing. */
+	for( ;; )
+	{
+		for(i =0 ; i< 1000000;i++)
+		{
+		}
 
- /* Task code goes here. */
- }
+		GPIO_write(PORT_0,PIN4,PIN_IS_LOW);
+		xLastWakeTime = xTaskGetTickCount();
+		//exectime3= xTaskGetTickCount()- exectime3;
+		vTaskDelayUntil( &xLastWakeTime, 20 );
+		vTaskGetRunTimeStats(dbgdata);
+		xSerialPutChar(' ');
+		vSerialPutString(dbgdata,200);
+		xSerialPutChar('\n');
+		//exectime3= xTaskGetTickCount();
+		GPIO_write(PORT_0,PIN4,PIN_IS_HIGH);
+		if(buttonState == PIN_IS_HIGH)
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
+		}
+		else
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
+		}
+
+		/* Task code goes here. */
+	}
 } 
+
 void Load_1_Simulation_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-		int i=0;
-	
+	int i=0;
 
-//configASSERT(((uint32_t ) pvParameters)==1);
- /* Enter an infinite loop to perform the task processing. */
- for( ;; )
- {
-	 for(i =0 ; i< 10000000;i++)
-	 {
-	 }
 
-	GPIO_write(PORT_0,PIN5,PIN_IS_LOW);
-	 xLastWakeTime = xTaskGetTickCount();
-	 exectime4= xTaskGetTickCount() - exectime4;
-	vTaskDelayUntil( &xLastWakeTime, 10 );
-	 exectime4= xTaskGetTickCount();
-	 	 	GPIO_write(PORT_0,PIN5,PIN_IS_HIGH);
- if(buttonState == PIN_IS_HIGH)
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
- }
- else
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
- }
+	//configASSERT(((uint32_t ) pvParameters)==1);
+	/* Enter an infinite loop to perform the task processing. */
+	for( ;; )
+	{
+		for(i =0 ; i< 10000000;i++)
+		{
+		}
 
- /* Task code goes here. */
- }
+		GPIO_write(PORT_0,PIN5,PIN_IS_LOW);
+		xLastWakeTime = xTaskGetTickCount();
+		// exectime4= xTaskGetTickCount() - exectime4;
+		vTaskDelayUntil( &xLastWakeTime, 10 );
+		vTaskGetRunTimeStats(dbgdata);
+		xSerialPutChar(' ');
+		vSerialPutString(dbgdata,200);
+		xSerialPutChar('\n');
+		// exectime4= xTaskGetTickCount();
+		GPIO_write(PORT_0,PIN5,PIN_IS_HIGH);
+		if(buttonState == PIN_IS_HIGH)
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
+		}
+		else
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
+		}
+
+		/* Task code goes here. */
+	}
 } 
+
 void Load_2_Simulation_Task( void * pvParameters )
 {
 	TickType_t xLastWakeTime;
-		int i=0;
-	
+	int i=0;
 
-//configASSERT(((uint32_t ) pvParameters)==1);
- /* Enter an infinite loop to perform the task processing. */
- for( ;; )
- {
-	 for(i =0 ; i< 1000000;i++)
-	 {
-	 }
 
-	GPIO_write(PORT_0,PIN6,PIN_IS_LOW);
-	 xLastWakeTime = xTaskGetTickCount();
-	 exectime5= xTaskGetTickCount()-exectime5;
-	vTaskDelayUntil( &xLastWakeTime, 100 );
-	 exectime5= xTaskGetTickCount();
-	 	 	GPIO_write(PORT_0,PIN6,PIN_IS_HIGH);
- if(buttonState == PIN_IS_HIGH)
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
- }
- else
- {
-//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
- }
+	//configASSERT(((uint32_t ) pvParameters)==1);
+	/* Enter an infinite loop to perform the task processing. */
+	for( ;; )
+	{
+		for(i =0 ; i< 10000000;i++)
+		{
+		}
 
- /* Task code goes here. */
- }
+		GPIO_write(PORT_0,PIN6,PIN_IS_LOW);
+		xLastWakeTime = xTaskGetTickCount();
+		// exectime5= xTaskGetTickCount()-exectime5;
+		vTaskDelayUntil( &xLastWakeTime, 100 );
+		vTaskGetRunTimeStats(dbgdata);
+		xSerialPutChar(' ');
+		vSerialPutString(dbgdata,200);
+		xSerialPutChar('\n');
+		// exectime5= xTaskGetTickCount();
+		GPIO_write(PORT_0,PIN6,PIN_IS_HIGH);
+		if(buttonState == PIN_IS_HIGH)
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_HIGH);
+		}
+		else
+		{
+			//	GPIO_write(PORT_0,PIN0,PIN_IS_LOW);
+		}
+
+		/* Task code goes here. */
+	}
 } 
 void vApplicationIdleHook( void )
 {
-//	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
+	//	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
 	//GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
-	
+
+}
+
+void vApplicationTickHook( void )
+{
+
+	//	GPIO_write(PORT_0,PIN2,PIN_IS_HIGH);
+	//GPIO_write(PORT_0,PIN2,PIN_IS_LOW);
+
 }
 /*
  * Application entry point:
@@ -296,67 +328,67 @@ int main( void )
 {
 	/* Setup the hardware for use with the Keil demo board. */
 	prvSetupHardware();
+	//xSerialPutChar('a');
 
-	
-    /* Create Tasks here */
-/* Create the task, storing the handle. */
-    xTaskPeriodicCreate(
-                    Button_1_Monitor_Task,       /* Function that implements the task. */
-                    "Button_1_Monitor_Task",          /* Text name for the task. */
-                    100,      /* Stack size in words, not bytes. */
-                    ( void * ) 0,    /* Parameter passed into the task. */
-                    1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &Button_1_MonitorTaskHandler,
-                    50								
-										);      /* Used to pass out the created task's handle. */
-/* Create the task, storing the handle. */
-    xTaskPeriodicCreate(
-                    Button_2_Monitor_Task,       /* Function that implements the task. */
-                    "Button_2_Monitor_Task",          /* Text name for the task. */
-                    100,      /* Stack size in words, not bytes. */
-                    ( void * ) 0,    /* Parameter passed into the task. */
-                    1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &Button_2_MonitorTaskHandler,
-										50
-										);      /* Used to pass out the created task's handle. */
-		    xTaskPeriodicCreate(
-                    Periodic_Transmitter_Task,       /* Function that implements the task. */
-                    "Periodic_Transmitter_Task",          /* Text name for the task. */
-                    100,      /* Stack size in words, not bytes. */
-                    ( void * ) 0,    /* Parameter passed into the task. */
-                    1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &Periodic_TransmitterTaskHandler,
-										100
-										);      /* Used to pass out the created task's handle. */	
-		    xTaskPeriodicCreate(
-                    Uart_Receiver_Task,       /* Function that implements the task. */
-                    "Uart_Receiver_Task",          /* Text name for the task. */
-                    100,      /* Stack size in words, not bytes. */
-                    ( void * ) 0,    /* Parameter passed into the task. */
-                    1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &Uart_ReceiverTaskHandler,
-										20
-										);      /* Used to pass out the created task's handle. */					
+	/* Create Tasks here */
+	/* Create the task, storing the handle. */
+	xTaskPeriodicCreate(
+			Button_1_Monitor_Task,       /* Function that implements the task. */
+			"Button_1_Monitor_Task",          /* Text name for the task. */
+			100,      /* Stack size in words, not bytes. */
+			( void * ) 0,    /* Parameter passed into the task. */
+			1,/* Priority at which the task is created.Priority of idle task 0 */
+			&Button_1_MonitorTaskHandler,
+			50
+	);      /* Used to pass out the created task's handle. */
+	/* Create the task, storing the handle. */
+	xTaskPeriodicCreate(
+			Button_2_Monitor_Task,       /* Function that implements the task. */
+			"Button_2_Monitor_Task",          /* Text name for the task. */
+			100,      /* Stack size in words, not bytes. */
+			( void * ) 0,    /* Parameter passed into the task. */
+			1,/* Priority at which the task is created.Priority of idle task 0 */
+			&Button_2_MonitorTaskHandler,
+			50
+	);      /* Used to pass out the created task's handle. */
+	xTaskPeriodicCreate(
+			Periodic_Transmitter_Task,       /* Function that implements the task. */
+			"Periodic_Transmitter_Task",          /* Text name for the task. */
+			100,      /* Stack size in words, not bytes. */
+			( void * ) 0,    /* Parameter passed into the task. */
+			1,/* Priority at which the task is created.Priority of idle task 0 */
+			&Periodic_TransmitterTaskHandler,
+			100
+	);      /* Used to pass out the created task's handle. */
+	xTaskPeriodicCreate(
+			Uart_Receiver_Task,       /* Function that implements the task. */
+			"Uart_Receiver_Task",          /* Text name for the task. */
+			100,      /* Stack size in words, not bytes. */
+			( void * ) 0,    /* Parameter passed into the task. */
+			1,/* Priority at which the task is created.Priority of idle task 0 */
+			&Uart_ReceiverTaskHandler,
+			20
+	);      /* Used to pass out the created task's handle. */
 
-		    xTaskPeriodicCreate(
-                    Load_1_Simulation_Task,       /* Function that implements the task. */
-                    "Load_1_Simulation_Task",          /* Text name for the task. */
-                    100,      /* Stack size in words, not bytes. */
-                    ( void * ) 0,    /* Parameter passed into the task. */
-                    1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &Load_1_SimulationTaskHandler,
-										10
-										);      /* Used to pass out the created task's handle. */		
-		    xTaskPeriodicCreate(
-                    Load_2_Simulation_Task,       /* Function that implements the task. */
-                    "Load_2_Simulation_Task",          /* Text name for the task. */
-                    100,      /* Stack size in words, not bytes. */
-                    ( void * ) 0,    /* Parameter passed into the task. */
-                    1,/* Priority at which the task is created.Priority of idle task 0 */
-                    &Load_2_SimulationTaskHandler,
-										100
-										);      /* Used to pass out the created task's handle. */												
-	 
+	xTaskPeriodicCreate(
+			Load_1_Simulation_Task,       /* Function that implements the task. */
+			"Load_1_Simulation_Task",          /* Text name for the task. */
+			100,      /* Stack size in words, not bytes. */
+			( void * ) 0,    /* Parameter passed into the task. */
+			1,/* Priority at which the task is created.Priority of idle task 0 */
+			&Load_1_SimulationTaskHandler,
+			10
+	);      /* Used to pass out the created task's handle. */
+	xTaskPeriodicCreate(
+			Load_2_Simulation_Task,       /* Function that implements the task. */
+			"Load_2_Simulation_Task",          /* Text name for the task. */
+			100,      /* Stack size in words, not bytes. */
+			( void * ) 0,    /* Parameter passed into the task. */
+			1,/* Priority at which the task is created.Priority of idle task 0 */
+			&Load_2_SimulationTaskHandler,
+			100
+	);      /* Used to pass out the created task's handle. */
+
 	/* Now all the tasks have been started - start the scheduler.
 
 	NOTE : Tasks run in system mode and the scheduler runs in Supervisor mode.
@@ -396,7 +428,7 @@ static void prvSetupHardware( void )
 
 	/* Configure GPIO */
 	GPIO_init();
-	
+
 	/* Config trace timer 1 and read T1TC to get current tick */
 	configTimer1();
 
